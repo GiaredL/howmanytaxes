@@ -1,11 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import styles from './page.module.css'
-import { TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
 import { budgets, totalTaxDollars } from './constants/budgets'
 import { calculateTax, calculateTaxContribution, type FilingStatus } from './utils/taxCalculations'
 import { formatCurrencyWithSymbol } from './utils/formatters'
+import Navigation from './components/Navigation'
 
 export default function Home() {
   const [income, setIncome] = useState(0)
@@ -27,12 +26,13 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      {/* <header style={{ padding: '20px', textAlign: 'right', color: 'white' }}>
-        <Link href="/about" style={{ color: 'white', textDecoration: 'underline' }}>
-          About
-        </Link>
-      </header> */}
-      <main>
+      <header className={styles.header}>
+        <Navigation />
+      </header>
+      <main className={styles.mainContainer}>
+        <div className={styles.hero}>
+          <h1>How Much Did You Spend On Federal Government Programs in 2024?</h1>
+        </div>
         <div className={styles.main}>
           <div className={styles.inputContainer}>
             <div className={styles.inputLabels}>
@@ -79,6 +79,7 @@ export default function Home() {
               <option value="agriculture">Agriculture</option>
             </select>
           </div>
+
           <div className={styles.resultContainer}>
             <h1>
               Your contribution to{' '}
@@ -89,20 +90,12 @@ export default function Home() {
                     .replace('tax dollars', '')
                     .replace('2025', '')
                 : 'selected program'}{' '}
-              is
             </h1>
-            <h1
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100px',
-                fontSize: '4rem',
-                color: 'red'
-              }}
-            >
-              {formatCurrencyWithSymbol(baselineContribution)}
-            </h1>
+            <h3>
+              ------------------ total tax calculation:{' '}
+              {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}
+            </h3>
+            <h1>{formatCurrencyWithSymbol(baselineContribution)}</h1>
           </div>
         </div>
       </main>

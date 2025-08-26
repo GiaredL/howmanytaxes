@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'frutiger-bold';
+  src: url(../../public/frutiger-bold.ttf);
+}
+
 :root {
   --foreground: #ffffff;
   --background: #000000;
@@ -12,7 +17,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'frutiger-bold';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
