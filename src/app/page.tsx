@@ -13,6 +13,18 @@ export default function Home() {
 
   const [baselineContribution, setBaselineContribution] = useState(0)
 
+  const budgetOptions = [
+    { label: 'Israel Aid', value: 'israelTaxDollars2025' },
+    { label: 'Medicare', value: 'medicare' },
+    { label: 'Social Security', value: 'socialSecurity' },
+    { label: 'National Defense', value: 'nationalDefense' },
+    { label: 'Interest on Debt', value: 'interest' },
+    { label: 'Veterans Benefits', value: 'verteransBenefits' },
+    { label: 'Transportation', value: 'transportation' },
+    { label: 'Education', value: 'education' },
+    { label: 'Agriculture', value: 'agriculture' }
+  ]
+
   useEffect(() => {
     if (income > 0 && budget) {
       const calculatedTax = calculateTax(income, filingStatus)
@@ -31,7 +43,7 @@ export default function Home() {
       </header>
       <main className={styles.mainContainer}>
         <div className={styles.hero}>
-          <h1>How Much Did You Spend On Federal Government Programs in 2024?</h1>
+          <p>How Much Did You Spend On Federal Government Programs in 2024?</p>
         </div>
         <div className={styles.main}>
           <div className={styles.inputContainer}>
@@ -67,35 +79,23 @@ export default function Home() {
               onChange={e => setBudget(e.target.value as keyof typeof budgets)}
               style={{ width: '100%', height: '40px', marginTop: '20px', marginBottom: '20px' }}
             >
-              <option value="">Select a Budget Category</option>
-              <option value="israelTaxDollars2025">Israel Aid</option>
-              <option value="medicare">Medicare</option>
-              <option value="socialSecurity">Social Security</option>
-              <option value="nationalDefense">National Defense</option>
-              <option value="interest">Interest on Debt</option>
-              <option value="verteransBenefits">Veterans Benefits</option>
-              <option value="transportation">Transportation</option>
-              <option value="education">Education</option>
-              <option value="agriculture">Agriculture</option>
+              {budgetOptions.map(b => (
+                <option key={b.value} value={b.value}>
+                  {b.label}
+                </option>
+              ))}
             </select>
           </div>
 
           <div className={styles.resultContainer}>
             <h1>
               Your contribution to{' '}
-              {budget
-                ? budget
-                    .replace(/([A-Z])/g, ' $1')
-                    .toLowerCase()
-                    .replace('tax dollars', '')
-                    .replace('2025', '')
-                : 'selected program'}{' '}
+              {budget ? budgetOptions.find(b => b.value === budget)?.label : 'select a budget'}{' '}
             </h1>
-            <h3>
-              ------------------ total tax calculation:{' '}
-              {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}
-            </h3>
-            <h1>{formatCurrencyWithSymbol(baselineContribution)}</h1>
+            <h3>total tax calculation: {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}</h3>
+            <div className={styles.contributionContainer}>
+              <p className={styles.contribution}>{formatCurrencyWithSymbol(baselineContribution)}</p>
+            </div>
           </div>
         </div>
       </main>
