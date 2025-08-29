@@ -42,8 +42,11 @@ export default function Home() {
         <Navigation />
       </header>
       <main className={styles.mainContainer}>
-        <div className={styles.hero}>
-          <p>How Much Did You Spend On Federal Government Programs in 2024?</p>
+        <div className={styles.heroText}>
+          <span>How Much Did You Spend</span>
+          <span> On </span>
+          <span style={{ color: 'lime' }}>Federal Government</span>
+          <span> programs in 2024?</span>
         </div>
         <div className={styles.main}>
           <div className={styles.inputContainer}>
