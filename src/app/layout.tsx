@@ -16,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="stylesheet" href="https://use.typekit.net/lrn7jph.css" />
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-6GGGZWK19P"></Script>
         <Script id="google-analytics">
