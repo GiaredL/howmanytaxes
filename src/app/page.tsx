@@ -10,6 +10,7 @@ export default function Home() {
   const [income, setIncome] = useState(0)
   const [filingStatus, setFilingStatus] = useState<FilingStatus>('single')
   const [budget, setBudget] = useState<keyof typeof budgets>()
+  const [animatedContribution, setAnimatedContribution] = useState(0)
 
   const [baselineContribution, setBaselineContribution] = useState(0)
 
@@ -36,6 +37,30 @@ export default function Home() {
     }
   }, [income, filingStatus, budget])
 
+  useEffect(() => {
+    let frame: number
+    const duration = 1000 // ms
+    const start = animatedContribution
+    const end = baselineContribution
+    const startTime = performance.now()
+
+    function animate(now: number) {
+      const elapsed = now - startTime
+      const progress = Math.min(elapsed / duration, 1)
+      const value = start + (end - start) * progress
+      setAnimatedContribution(value)
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate)
+      } else {
+        setAnimatedContribution(end)
+      }
+    }
+
+    frame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(frame)
+  }, [baselineContribution])
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -50,20 +75,9 @@ export default function Home() {
           </span>
           <span> programs in 2024?</span>
         </div>
-        <div className={styles.inputBar}>
-          {/* <input
-            type="number"
-            placeholder="Enter your income here"
-            value={income || ''}
-            onChange={e => setIncome(parseFloat(e.target.value) || 0)}
-            className={styles.incomeInput}
-          /> */}
-        </div>
+        <div className={styles.inputBar}></div>
         <div className={styles.main}>
           <div className={styles.budgetBarContainer}>
-            {/* <div className={styles.leftLabel}>
-              <p>Start Here</p>
-            </div> */}
             <div className={styles.budgetBar}>
               <p>choose a budget category</p>
               {budgetOptions.map(b => (
@@ -102,30 +116,21 @@ export default function Home() {
                   </select>
                   <label className={styles.label}>Enter your filing status</label>
                 </div>
-                {/* 
-              <p>Pick a budget category</p>
-              <select
-                value={budget}
-                onChange={e => setBudget(e.target.value as keyof typeof budgets)}
-                style={{ width: '100%', height: '40px', marginTop: '20px', marginBottom: '20px' }}
-              >
-                {budgetOptions.map(b => (
-                  <option key={b.value} value={b.value}>
-                    {b.label}
-                  </option>
-                ))}
-              </select> */}
               </div>
             </div>
 
             <div className={styles.resultContainer}>
               <h1>
                 Your contribution to{' '}
-                {budget ? budgetOptions.find(b => b.value === budget)?.label : 'select a budget'}{' '}
+                {budget ? (
+                  <span style={{ color: 'lime' }}>{budgetOptions.find(b => b.value === budget)?.label}</span>
+                ) : (
+                  'select a budget'
+                )}{' '}
               </h1>
               <h3>total tax calculation: {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}</h3>
               <div className={styles.contributionContainer}>
-                <p className={styles.contribution}>{formatCurrencyWithSymbol(baselineContribution)}</p>
+                <p className={styles.contribution}>{formatCurrencyWithSymbol(animatedContribution)}</p>
               </div>
             </div>
           </div>
