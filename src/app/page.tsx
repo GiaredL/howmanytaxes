@@ -80,7 +80,13 @@ export default function Home() {
                   type="number"
                   value={income || ''}
                   onChange={e => setIncome(parseFloat(e.target.value) || 0)}
-                  style={{ width: '100%', height: '70px', marginTop: '20px', marginBottom: '20px' }}
+                  style={{
+                    width: '100%',
+                    height: '70px',
+                    marginTop: '20px',
+                    marginBottom: '20px',
+                    fontSize: '16px'
+                  }}
                 />
                 <label className={styles.label}>Enter your yearly income</label>
 
