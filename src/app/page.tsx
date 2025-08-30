@@ -5,6 +5,7 @@ import { budgets, totalTaxDollars } from './constants/budgets'
 import { calculateTax, calculateTaxContribution, type FilingStatus } from './utils/taxCalculations'
 import { formatCurrencyWithSymbol } from './utils/formatters'
 import Navigation from './components/Navigation'
+import Calculation from './components/Calculation'
 
 export default function Home() {
   const [income, setIncome] = useState(0)
@@ -135,6 +136,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <Calculation />
       </main>
     </div>
   )
