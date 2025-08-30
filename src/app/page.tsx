@@ -61,9 +61,9 @@ export default function Home() {
         </div>
         <div className={styles.main}>
           <div className={styles.budgetBarContainer}>
-            <div className={styles.leftLabel}>
+            {/* <div className={styles.leftLabel}>
               <p>Start Here</p>
-            </div>
+            </div> */}
             <div className={styles.budgetBar}>
               <p>choose a budget category</p>
               {budgetOptions.map(b => (
