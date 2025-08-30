@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import styles from './page.module.css'
+import styles from './page.module.scss'
 import { budgets, totalTaxDollars } from './constants/budgets'
 import { calculateTax, calculateTaxContribution, type FilingStatus } from './utils/taxCalculations'
 import { formatCurrencyWithSymbol } from './utils/formatters'
