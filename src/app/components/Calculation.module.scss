@@ -13,15 +13,17 @@
   font-weight: 500;
 
   @media (max-width: 700px) {
-    font-size: 18px;
+    font-size: 24px;
+    margin-bottom: 10px;
   }
 }
 
 .contribution {
-  background-color: #8582d1;
+  background-color: #7513e3;
+
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  width: 50%;
+  width: 70%;
   padding: 20px;
 
   @media (max-width: 700px) {
@@ -31,12 +33,23 @@
 
 .sources {
   background-color: #8582d1;
+  background-color: #7513e3;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  width: 50%;
+  width: 30%;
   padding: 20px;
 
   @media (max-width: 700px) {
     width: 100%;
   }
+}
+
+.buyCoffee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
 }

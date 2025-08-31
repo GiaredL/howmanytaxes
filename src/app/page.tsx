@@ -11,7 +11,7 @@ export default function Home() {
   const [income, setIncome] = useState(0)
   const [filingStatus, setFilingStatus] = useState<FilingStatus>('single')
   const [budget, setBudget] = useState<keyof typeof budgets>()
-  const [animatedContribution, setAnimatedContribution] = useState(0)
+  const [animatedContribution, setAnimatedContribution] = useState(1000)
 
   const [baselineContribution, setBaselineContribution] = useState(0)
 
@@ -75,14 +75,21 @@ export default function Home() {
             Federal Government
           </span>
           <span> programs in 2024?</span>
+          <p style={{ marginTop: '20px' }}>
+            Informational only, not tax/legal/financial advice. Consult a professional.
+          </p>
         </div>
         <div className={styles.inputBar}></div>
         <div className={styles.main}>
           <div className={styles.budgetBarContainer}>
             <div className={styles.budgetBar}>
-              <p>choose a budget category</p>
+              <p>Select a federal program:</p>
               {budgetOptions.map(b => (
-                <button key={b.value} onClick={() => setBudget(b.value as keyof typeof budgets)}>
+                <button
+                  key={b.value}
+                  onClick={() => setBudget(b.value as keyof typeof budgets)}
+                  className={budget === b.value ? styles.selectedButton : ''}
+                >
                   {b.label}
                 </button>
               ))}
@@ -122,14 +129,22 @@ export default function Home() {
 
             <div className={styles.resultContainer}>
               <h1>
-                Your contribution to{' '}
-                {budget ? (
-                  <span style={{ color: 'lime' }}>{budgetOptions.find(b => b.value === budget)?.label}</span>
+                {income ? (
+                  budget ? (
+                    <span style={{ color: 'lime' }}>
+                      {' '}
+                      Your contribution to {budgetOptions.find(b => b.value === budget)?.label}
+                    </span>
+                  ) : (
+                    'select a budget'
+                  )
                 ) : (
-                  'select a budget'
+                  'Enter your income first, then select a program'
                 )}{' '}
               </h1>
-              <h3>total tax calculation: {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}</h3>
+              <h3>
+                Approximate income tax calculation: {formatCurrencyWithSymbol(calculateTax(income, filingStatus))}
+              </h3>
               <div className={styles.contributionContainer}>
                 <p className={styles.contribution}>{formatCurrencyWithSymbol(animatedContribution)}</p>
               </div>
