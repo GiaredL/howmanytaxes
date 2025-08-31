@@ -77,6 +77,7 @@ const Calculation = () => {
             <Image src="/buy-me-a-coffee.svg" alt="buy-me-a-coffee" width={250} height={55} />
           </a>
         </div>
+        <p style={{ marginTop: '10px;' }}>For all inquiries, send me an email at digirainstuff@gmail.com</p>
       </div>
     </div>
   )
