@@ -74,8 +74,8 @@ export default function Home() {
           <span style={{ color: 'lime' }} className={styles.animatedWords}>
             Federal Government
           </span>
-          <span> programs?</span>
-          <p style={{ marginTop: '20px' }}>
+          <span> Programs?</span>
+          <p style={{ marginTop: '20px', paddingRight: '40px' }}>
             Informational only, not tax/legal/financial advice. Consult a professional.
           </p>
         </div>
