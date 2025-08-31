@@ -69,12 +69,12 @@ export default function Home() {
       </header>
       <main className={styles.mainContainer}>
         <div className={styles.heroText}>
-          <span>How Much Did You Spend</span>
+          <span>How Much Do You Spend</span>
           <span> On </span>
           <span style={{ color: 'lime' }} className={styles.animatedWords}>
             Federal Government
           </span>
-          <span> programs in 2024?</span>
+          <span> programs?</span>
           <p style={{ marginTop: '20px' }}>
             Informational only, not tax/legal/financial advice. Consult a professional.
           </p>
@@ -120,6 +120,8 @@ export default function Home() {
                   >
                     <option value="single">Single</option>
                     <option value="married-jointly">Married Filing Jointly</option>
+                    <option value="married-separately">Married Filing Separately</option>
+
                     <option value="head-of-household">Head of Household</option>
                   </select>
                   <label className={styles.label}>Enter your filing status</label>

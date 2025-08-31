@@ -38,12 +38,23 @@ const Calculation = () => {
             </a>
           </p>
 
-          <p style={{ fontSize: '16px' }}>
+          <p style={{ fontSize: '16px', marginBottom: '20px' }}>
             <span style={{ fontWeight: '600' }}>Disclaimer:</span> This estimate shows federal income tax only (tax
             on taxable income after the standard deduction, which is applied by default). It does not include
             payroll taxes (Social Security/Medicare), tax credits, itemized deductions, capital gains treatment,
             the AMT, state or local taxes, pre‑tax retirement contributions, or other adjustments. Use this as an
             informational approximation only and consult a tax professional for a precise result.
+          </p>
+
+          <p>
+            I learned a lot by making this project, but{' '}
+            <span style={{ fontStyle: 'italic', fontWeight: '700' }}>I am no tax expert. </span> I will continually
+            try to make this calculation more accurate.
+            <span style={{ fontStyle: 'italic', fontWeight: '700' }}>
+              {' '}
+              These numbers should be taken with a grain of salt.
+            </span>{' '}
+            -G
           </p>
         </div>
         <div>
@@ -51,7 +62,16 @@ const Calculation = () => {
         </div>
       </div>
       <div className={styles.sources}>
-        {/* <h2 className={styles.contributionCalc}>Data Sources</h2> */}
+        <h2 className={styles.contributionCalc}>Yo!</h2>
+        <p>
+          I hope you&apos;ve enjoyed using this calculator. I hope to build this out more so people can use it as a
+          way to get a better idea of what they&apos;re buying through the US government.
+        </p>{' '}
+        <p style={{ marginTop: '10px' }}>
+          I had a great time building this, and I can&apos;t wait to work on my next project like this one, I have
+          some pretty good ideas so stay tuned!{' '}
+        </p>
+        <p style={{ marginTop: '10px' }}>If you want to support my work, consider buying me a coffee ;) </p>
         <div className={styles.buyCoffee}>
           <a href="https://www.buymeacoffee.com/digirain">
             <Image src="/buy-me-a-coffee.svg" alt="buy-me-a-coffee" width={250} height={55} />
