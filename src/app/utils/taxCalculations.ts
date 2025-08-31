@@ -37,17 +37,36 @@ export const getBracketsForFilingStatus = (filingStatus: FilingStatus): TaxBrack
   }
 }
 
-export const calculateTax = (income: number, filingStatus: FilingStatus): number => {
+export const getStandardDeduction = (filingStatus: FilingStatus): number => {
+  switch (filingStatus) {
+    case 'married-jointly':
+      return 27700
+    case 'married-separately':
+      return 13850
+    case 'head-of-household':
+      return 20800
+    case 'single':
+    default:
+      return 13850
+  }
+}
+
+export const calculateTax = (
+  income: number,
+  filingStatus: FilingStatus,
+  { applyStandardDeduction = true }: { applyStandardDeduction?: boolean } = {}
+): number => {
+  const deduction = applyStandardDeduction ? getStandardDeduction(filingStatus) : 0
+  const taxableIncome = Math.max(0, income - deduction)
+
   const brackets = getBracketsForFilingStatus(filingStatus)
   let totalTax = 0
-
   for (const bracket of brackets) {
-    if (income > bracket.min) {
-      const taxableAmount = Math.min(income - bracket.min, (bracket.max ?? Infinity) - bracket.min)
+    if (taxableIncome > bracket.min) {
+      const taxableAmount = Math.min(taxableIncome - bracket.min, (bracket.max ?? Infinity) - bracket.min)
       totalTax += taxableAmount * bracket.rate
     }
-
-    if (bracket.max === null || income <= bracket.max) {
+    if (bracket.max === null || taxableIncome <= bracket.max) {
       break
     }
   }

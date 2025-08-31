@@ -16,11 +16,11 @@ export default function Home() {
   const [baselineContribution, setBaselineContribution] = useState(0)
 
   const budgetOptions = [
-    { label: 'Israel Aid', value: 'israelTaxDollars2025' },
     { label: 'Medicare', value: 'medicare' },
     { label: 'Social Security', value: 'socialSecurity' },
     { label: 'National Defense', value: 'nationalDefense' },
     { label: 'Interest on Debt', value: 'interest' },
+    { label: 'Israel Aid', value: 'israelTaxDollars2025' },
     { label: 'Veterans Benefits', value: 'verteransBenefits' },
     { label: 'Transportation', value: 'transportation' },
     { label: 'Education', value: 'education' },
