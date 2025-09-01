@@ -42,8 +42,11 @@ const Calculation = () => {
             <span style={{ fontWeight: '600' }}>Disclaimer:</span> This estimate shows federal income tax only (tax
             on taxable income after the standard deduction, which is applied by default). It does not include
             payroll taxes (Social Security/Medicare), tax credits, itemized deductions, capital gains treatment,
-            the AMT, state or local taxes, pre‑tax retirement contributions, or other adjustments. Use this as an
-            informational approximation only and consult a tax professional for a precise result.
+            the AMT, state or local taxes, pre-tax retirement contributions, or other adjustments. Use this as an
+            informational approximation only and consult a tax professional for a precise result. <br /> This
+            calculator estimates your share of federal income tax allocated to Social Security and Medicare
+            spending, not your actual payroll tax contribution. Social Security and Medicare are primarily funded
+            by payroll taxes, which are not calculated here.
           </p>
 
           <p>
