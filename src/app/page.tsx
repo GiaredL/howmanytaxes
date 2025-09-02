@@ -64,7 +64,11 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
+      <h1>
+        This site is undergoing maintenance so we can make the calculations as accurate as possible. Check back
+        soon!
+      </h1>
+      {/* <header className={styles.header}>
         <Navigation />
       </header>
       <main className={styles.mainContainer}>
@@ -154,7 +158,7 @@ export default function Home() {
           </div>
         </div>
         <Calculation />
-      </main>
+      </main> */}
     </div>
   )
 }
