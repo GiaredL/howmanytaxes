@@ -1,9 +1,7 @@
 .page {
   display: flex;
-  // flex-direction: column;
-  align-items: center; // TODO:REMOVE
-  width: 100%;
-  height: 100vh;
+  flex-direction: column;
+  align-items: center;
 }
 
 .page h1 {
@@ -139,6 +137,7 @@
   border-radius: 8px;
   padding: 10px;
   height: 40px;
+  color: white !important;
 }
 
 .label {

@@ -12,8 +12,12 @@ export default function Home() {
   const [filingStatus, setFilingStatus] = useState<FilingStatus>('single')
   const [budget, setBudget] = useState<keyof typeof budgets>()
   const [animatedContribution, setAnimatedContribution] = useState(1000)
+  const [pass, setPass] = useState('')
+  const [isAuth, setIsAuth] = useState(false)
 
   const [baselineContribution, setBaselineContribution] = useState(0)
+
+  const password = 'bigMoneyBaby2002'
 
   const budgetOptions = [
     { label: 'Medicare', value: 'medicare' },
@@ -62,13 +66,28 @@ export default function Home() {
     return () => cancelAnimationFrame(frame)
   }, [baselineContribution])
 
+  if (!isAuth) {
+    return (
+      <div className={styles.page}>
+        <label style={{ marginBottom: '20px', marginTop: '40px' }}>enter a password fool</label>
+        <input
+          value={pass}
+          onChange={e => setPass(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter' && pass === password) {
+              setIsAuth(true)
+            }
+          }}
+          type="password"
+          placeholder="Enter password"
+        />
+      </div>
+    )
+  }
+
   return (
     <div className={styles.page}>
-      <h1>
-        This site is undergoing maintenance so we can make the calculations as accurate as possible. Check back
-        soon!
-      </h1>
-      {/* <header className={styles.header}>
+      <header className={styles.header}>
         <Navigation />
       </header>
       <main className={styles.mainContainer}>
@@ -158,7 +177,7 @@ export default function Home() {
           </div>
         </div>
         <Calculation />
-      </main> */}
+      </main>
     </div>
   )
 }
