@@ -116,17 +116,18 @@
   border-radius: 5px;
   // border-top: none;
   // border-end-start-radius: 5px;
-  width: 100%;
+  width: 400px;
   // border-end-end-radius: 5px;
   height: 100%;
   background-color: black;
 
   overflow: hidden;
 
-  // @media (max-width: 700px) {
-  //   border: 3px solid lime;
-  //   border-radius: 5px;
-  // }
+  @media (max-width: 700px) {
+    border: 3px solid lime;
+    border-radius: 5px;
+    width: 100%;
+  }
 }
 
 .inputLabels input,
@@ -211,6 +212,7 @@
   display: flex;
   margin-bottom: 60px;
   gap: 40px;
+  align-items: flex-start;
 
   @media (max-width: 700px) {
     flex-direction: column;
@@ -230,21 +232,23 @@
 .resultContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 0 20px;
 
   h1 {
     margin-bottom: 10px;
+    text-align: left;
   }
 
   h3 {
     font-weight: 400;
     font-size: 16px;
+    text-align: left;
   }
 
   @media (max-width: 700px) {
     padding: 0;
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 
@@ -256,6 +260,7 @@
   font-size: clamp(5rem, 10vw, 11rem);
   max-width: 100%;
   color: #ff0341;
+  font-variant-numeric: tabular-nums;
 
   @media (max-width: 700px) {
     align-items: baseline;
