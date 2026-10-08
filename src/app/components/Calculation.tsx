@@ -1,4 +1,9 @@
 import Image from "next/image";
+import {
+  DISCLAIMER_ESTIMATE,
+  DISCLAIMER_NOT_AFFILIATED,
+  DISCLAIMER_SOURCES,
+} from "../constants/disclaimers";
 import styles from "./Calculation.module.scss";
 
 const Calculation = () => {
@@ -11,7 +16,7 @@ const Calculation = () => {
 
         <p className={styles.lead}>
           Two kinds of federal tax, then a simple split of where that money
-          goes. Estimate only — not a tax return.
+          goes. {DISCLAIMER_ESTIMATE}
         </p>
 
         <ol className={styles.steps}>
@@ -23,16 +28,16 @@ const Calculation = () => {
             <p className={styles.formula}>
               taxable income = income − deduction
               <br />
-              then apply IRS tax brackets
+              then apply published federal tax brackets
             </p>
             <p>
               Deduction is the{" "}
               <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets">
                 standard deduction
               </a>{" "}
-              for your filing status, or your itemized total if it’s higher.
-              Self-employed: we also subtract half of SE tax first (like the IRS
-              does).
+              published for your filing status, or your itemized total if it’s
+              higher. Self-employed: we also subtract half of SE tax first
+              (common federal practice).
             </p>
             <p>
               <strong>Payroll tax</strong> (Social Security &amp; Medicare HI):
@@ -66,13 +71,15 @@ const Calculation = () => {
               program’s spending
             </p>
             <p>
-              Spending and totals come from the U.S. Treasury{" "}
+              Spending and receipt totals come from public U.S. Treasury Fiscal
+              Data (the{" "}
               <a href="https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/">
                 Monthly Treasury Statement
               </a>
-              . Country aid under International Affairs uses{" "}
+              ). Country examples under International Affairs use public{" "}
               <a href="https://foreignassistance.gov/">ForeignAssistance.gov</a>{" "}
-              shares (illustrative — not the same as the Treasury IA total).
+              shares — illustrative only, and not the same as the Treasury
+              International Affairs total.
             </p>
           </li>
 
@@ -88,12 +95,15 @@ const Calculation = () => {
         <div className={styles.notes}>
           <h3>Worth knowing</h3>
           <ul>
+            <li>{DISCLAIMER_ESTIMATE}</li>
+            <li>{DISCLAIMER_NOT_AFFILIATED}</li>
+            <li>{DISCLAIMER_SOURCES}</li>
             <li>
               We skip credits, AMT, and most special tax situations — so this
               won’t match your exact refund or bill.
             </li>
             <li>
-              Employee estimates use <em>your</em> FICA share, not the
+              Employee estimates use <em>your</em> payroll-tax share, not the
               employer’s match.
             </li>
             <li>
@@ -108,7 +118,7 @@ const Calculation = () => {
         </div>
 
         <p className={styles.signoff}>
-          Built as an explainer, not advice. Take the numbers with a grain of
+          Built as an independent explainer. Take the numbers with a grain of
           salt. —G
         </p>
       </div>
@@ -135,6 +145,9 @@ const Calculation = () => {
         <p className={styles.email}>
           Questions:{" "}
           <a href="mailto:digirainstuff@gmail.com">digirainstuff@gmail.com</a>
+        </p>
+        <p className={styles.sidebarDisclaimer}>
+          {DISCLAIMER_ESTIMATE} {DISCLAIMER_NOT_AFFILIATED}
         </p>
       </div>
     </div>

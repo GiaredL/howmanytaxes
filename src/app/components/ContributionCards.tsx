@@ -145,8 +145,8 @@ export default function ContributionCards({
         <h2>Your contributions this year</h2>
         <p>
           {hasIncome
-            ? "Select a program to see where that share goes"
-            : "Enter income to fill amounts"}
+            ? "Estimate only — not tax advice. Select a program to see where that share goes."
+            : "Enter income to fill amounts. Estimate only — not tax advice."}
         </p>
       </header>
 

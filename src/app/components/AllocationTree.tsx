@@ -579,8 +579,8 @@ export default function AllocationTree({
         <div>
           <h2>How it splits · this year so far</h2>
           <p>
-            Click a program to fan out its parts · click again to collapse ·
-            drag to pan · scroll to zoom
+            Estimate only — not tax advice · click a program to fan out its
+            parts · drag to pan · scroll to zoom
           </p>
         </div>
         <div className={styles.zoomBar}>

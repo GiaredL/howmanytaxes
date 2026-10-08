@@ -5,7 +5,8 @@ import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'How Many Taxes?',
-  description: 'Know your contribution.'
+  description:
+    'Independent estimate of how federal taxes map to government programs. Not tax advice. Not affiliated with the IRS or U.S. government.',
 }
 
 export default function RootLayout({

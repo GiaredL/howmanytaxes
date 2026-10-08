@@ -9,6 +9,12 @@ import {
   totalTaxDollars as fallbackTotalTaxDollars,
 } from "./constants/budgets";
 import { PROGRAM_OPTIONS } from "./constants/programs";
+import {
+  DISCLAIMER_COMPACT,
+  DISCLAIMER_ESTIMATE,
+  DISCLAIMER_NOT_AFFILIATED,
+  DISCLAIMER_SOURCES,
+} from "./constants/disclaimers";
 import type { CountryAidSnapshot } from "@/lib/fiscal/foreignAidClient";
 import fallbackCountryAid from "@/lib/fiscal/__fixtures__/country-aid-snapshot-fy2025.json";
 import type { ProgramId, SubProgramOutlay } from "@/lib/fiscal/types";
@@ -314,6 +320,7 @@ export default function Home() {
       <button type="submit" className={styles.calculateBtn}>
         {showResults ? "Update breakdown" : "Calculate my breakdown"}
       </button>
+      <p className={styles.formDisclaimer}>{DISCLAIMER_COMPACT}</p>
     </form>
   );
 
@@ -362,17 +369,17 @@ export default function Home() {
                 where?
               </h1>
               <p>
-                Enter a few details to see how your federal income and payroll
-                taxes map to real government programs — using official Treasury
-                and IRS figures.
+                Enter a few details to see a rough picture of how your federal
+                taxes might map to government programs.
               </p>
+              <p className={styles.heroDisclaimer}>{DISCLAIMER_ESTIMATE}</p>
             </div>
 
             <div className={styles.zeroForm}>
               {inputForm}
-              <p className={styles.zeroMeta}>
-                Informational only · Treasury MTS FY{budgetMeta.fiscalYear} ·
-                IRS/SSA {taxYear}
+              <p className={styles.zeroMetaDetail}>
+                {DISCLAIMER_SOURCES} Tax year {taxYear}; spending snapshot FY
+                {budgetMeta.fiscalYear}. {DISCLAIMER_NOT_AFFILIATED}
               </p>
             </div>
           </section>
@@ -381,11 +388,16 @@ export default function Home() {
             <section className={styles.resultsHeader} aria-label="Your inputs">
               <div className={styles.toolbarIntro}>
                 <h1 className={styles.resultsTitle}>Your breakdown</h1>
-                <p>
-                  Estimate · MTS FY{budgetMeta.fiscalYear} · tax year {taxYear}
+                <p className={styles.resultsDisclaimer}>
+                  {DISCLAIMER_ESTIMATE} Tax year {taxYear}
                   {taxEstimate?.payroll.oasdiCapped
-                    ? ` · SS wages capped at $${taxEstimate.payroll.socialSecurityWageBaseUsed.toLocaleString()}`
+                    ? ` · Social Security wages capped at $${taxEstimate.payroll.socialSecurityWageBaseUsed.toLocaleString()}`
                     : ""}
+                </p>
+                <p className={styles.resultsDisclaimerSecondary}>
+                  {DISCLAIMER_SOURCES} Spending figures use public U.S. Treasury
+                  data (FY{budgetMeta.fiscalYear}).{" "}
+                  {DISCLAIMER_NOT_AFFILIATED}
                 </p>
               </div>
 

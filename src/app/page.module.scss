@@ -101,6 +101,14 @@
   }
 }
 
+.heroDisclaimer {
+  margin-top: 10px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600;
+  opacity: 0.85 !important;
+  max-width: 48ch !important;
+}
+
 .animatedWords {
   color: lime;
   animation: flicker-glitch 0.8s alternate;
@@ -172,14 +180,32 @@
 
 .zeroMeta {
   text-align: center;
-  font-size: 0.72rem;
-  opacity: 0.5;
-  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.75;
+  margin-top: 4px;
+  line-height: 1.35;
+}
+
+.zeroMetaDetail {
+  text-align: center;
+  font-size: 0.68rem;
+  opacity: 0.55;
+  margin-top: 6px;
+  line-height: 1.4;
 }
 
 .formError {
   font-size: 0.8rem;
   color: #ff7a9a;
+}
+
+.formDisclaimer {
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  opacity: 0.6;
+  margin: 0;
 }
 
 /* —— Results header (read-only summary) —— */
@@ -197,13 +223,23 @@
   .resultsTitle {
     font-size: clamp(1.35rem, 2.5vw, 1.75rem);
     font-weight: 600;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
+}
 
-  p {
-    font-size: 0.78rem;
-    opacity: 0.6;
-  }
+.resultsDisclaimer {
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.85;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.resultsDisclaimerSecondary {
+  font-size: 0.72rem;
+  opacity: 0.55;
+  line-height: 1.4;
+  max-width: 72ch;
 }
 
 .inputSummary {
