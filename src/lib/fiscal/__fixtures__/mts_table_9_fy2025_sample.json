@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "record_date": "2025-09-30",
+      "classification_desc": "Individual Income Taxes",
+      "current_fytd_rcpt_outly_amt": "2656044447275.63",
+      "data_type_cd": "D",
+      "record_type_cd": "RSG",
+      "record_fiscal_year": "2025",
+      "src_line_nbr": "1"
+    },
+    {
+      "record_date": "2025-09-30",
+      "classification_desc": "National Defense",
+      "current_fytd_rcpt_outly_amt": "916648676662.05",
+      "data_type_cd": "D",
+      "record_type_cd": "F",
+      "record_fiscal_year": "2025",
+      "src_line_nbr": "10"
+    },
+    {
+      "record_date": "2025-09-30",
+      "classification_desc": "Transportation",
+      "current_fytd_rcpt_outly_amt": "145804369616.67",
+      "data_type_cd": "D",
+      "record_type_cd": "F",
+      "record_fiscal_year": "2025",
+      "src_line_nbr": "17"
+    },
+    {
+      "record_date": "2025-09-30",
+      "classification_desc": "Net Interest",
+      "current_fytd_rcpt_outly_amt": "970358886994.32",
+      "data_type_cd": "D",
+      "record_type_cd": "F",
+      "record_fiscal_year": "2025",
+      "src_line_nbr": "31"
+    }
+  ],
+  "meta": { "count": 4 }
+}

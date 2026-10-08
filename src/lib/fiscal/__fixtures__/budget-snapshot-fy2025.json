@@ -1,0 +1,452 @@
+{
+  "meta": {
+    "fiscalYear": 2025,
+    "recordDate": "2025-09-30",
+    "sourceUrl": "https://fiscaldata.treasury.gov/datasets/monthly-treasury-statement/",
+    "dataset": "mts_table_9",
+    "retrievedAt": "2026-10-08T00:00:00.000Z"
+  },
+  "outlaysByProgram": {
+    "nationalDefense": 916648676662.05,
+    "internationalAffairs": 45169891179.7,
+    "generalScienceSpaceTechnology": 42084437535.94,
+    "energy": 20892010637.8,
+    "naturalResourcesEnvironment": 88312257165.92,
+    "agriculture": 49337681356.37,
+    "commerceHousingCredit": -28620513919.81,
+    "transportation": 145804369616.67,
+    "communityRegionalDevelopment": 84529870131.32,
+    "education": 69194134949.41,
+    "health": 978877168639.95,
+    "medicare": 996719243004.76,
+    "incomeSecurity": 701583598129.63,
+    "socialSecurity": 1580685783033.83,
+    "verteransBenefits": 377161882980.59,
+    "administrationOfJustice": 85180458290,
+    "generalGovernment": 36278602219.52,
+    "interest": 970358886994.32,
+    "undistributedOffsettingReceipts": -150224771558.67
+  },
+  "totalIndividualIncomeTaxReceipts": 2656044447275.63,
+  "totalFunctionOutlays": 7009973667049.3,
+  "subOutlaysByProgram": {
+    "nationalDefense": [
+      {
+        "id": "department-of-defense-military",
+        "label": "Department of Defense-Military",
+        "outlay": 868432055612.01
+      },
+      {
+        "id": "atomic-energy-defense-activities",
+        "label": "Atomic energy defense activities",
+        "outlay": 36255577061.82
+      },
+      {
+        "id": "defense-related-activities",
+        "label": "Defense-related activities",
+        "outlay": 11961043988.22
+      }
+    ],
+    "internationalAffairs": [
+      {
+        "id": "international-development-and-humanitarian-assistance",
+        "label": "International development and humanitarian assistance",
+        "outlay": 30014972926.1
+      },
+      {
+        "id": "international-security-assistance",
+        "label": "International security assistance",
+        "outlay": 15514940232.15
+      },
+      {
+        "id": "international-financial-programs",
+        "label": "International financial programs",
+        "outlay": -14937940001.46
+      },
+      {
+        "id": "conduct-of-foreign-affairs",
+        "label": "Conduct of foreign affairs",
+        "outlay": 12557244796.54
+      },
+      {
+        "id": "foreign-information-and-exchange-activities",
+        "label": "Foreign information and exchange activities",
+        "outlay": 2020673226.37
+      }
+    ],
+    "generalScienceSpaceTechnology": [
+      {
+        "id": "space-flight-research-and-supporting-activities",
+        "label": "Space flight, research, and supporting activities",
+        "outlay": 23604334264.13
+      },
+      {
+        "id": "general-science-and-basic-research",
+        "label": "General science and basic research",
+        "outlay": 18480103271.81
+      }
+    ],
+    "energy": [
+      {
+        "id": "energy-supply",
+        "label": "Energy supply",
+        "outlay": 9747296249.94
+      },
+      {
+        "id": "energy-conservation",
+        "label": "Energy conservation",
+        "outlay": 8083959057.98
+      },
+      {
+        "id": "emergency-energy-preparedness",
+        "label": "Emergency energy preparedness",
+        "outlay": 2384743411.08
+      },
+      {
+        "id": "energy-information-policy-and-regulation",
+        "label": "Energy information, policy, and regulation",
+        "outlay": 676011918.8
+      }
+    ],
+    "naturalResourcesEnvironment": [
+      {
+        "id": "pollution-control-and-abatement",
+        "label": "Pollution control and abatement",
+        "outlay": 37442211047.47
+      },
+      {
+        "id": "water-resources",
+        "label": "Water resources",
+        "outlay": 16997651353.5
+      },
+      {
+        "id": "conservation-and-land-management",
+        "label": "Conservation and land management",
+        "outlay": 16977207912.54
+      },
+      {
+        "id": "other-natural-resources",
+        "label": "Other natural resources",
+        "outlay": 11289856443.52
+      },
+      {
+        "id": "recreational-resources",
+        "label": "Recreational resources",
+        "outlay": 5605330408.89
+      }
+    ],
+    "agriculture": [
+      {
+        "id": "agricultural-research-and-services",
+        "label": "Agricultural research and services",
+        "outlay": 26265409595.05
+      },
+      {
+        "id": "farm-income-stabilization",
+        "label": "Farm income stabilization",
+        "outlay": 23072271761.32
+      }
+    ],
+    "commerceHousingCredit": [
+      {
+        "id": "mortgage-credit",
+        "label": "Mortgage credit",
+        "outlay": -40708400357.66
+      },
+      {
+        "id": "other-advancement-of-commerce",
+        "label": "Other advancement of commerce",
+        "outlay": 39083427764.01
+      },
+      {
+        "id": "deposit-insurance",
+        "label": "Deposit insurance",
+        "outlay": -32160048192.95
+      },
+      {
+        "id": "postal-service",
+        "label": "Postal service",
+        "outlay": 5164506866.79
+      }
+    ],
+    "transportation": [
+      {
+        "id": "ground-transportation",
+        "label": "Ground transportation",
+        "outlay": 100813615153.17
+      },
+      {
+        "id": "air-transportation",
+        "label": "Air transportation",
+        "outlay": 29708897645.94
+      },
+      {
+        "id": "water-transportation",
+        "label": "Water transportation",
+        "outlay": 14350697301.08
+      },
+      {
+        "id": "other-transportation",
+        "label": "Other transportation",
+        "outlay": 915931335.14
+      },
+      {
+        "id": "transportation",
+        "label": "Transportation",
+        "outlay": 15228181.34
+      }
+    ],
+    "communityRegionalDevelopment": [
+      {
+        "id": "disaster-relief-and-insurance",
+        "label": "Disaster relief and insurance",
+        "outlay": 65137026195.27
+      },
+      {
+        "id": "community-development",
+        "label": "Community development",
+        "outlay": 12081479327.45
+      },
+      {
+        "id": "area-and-regional-development",
+        "label": "Area and regional development",
+        "outlay": 7311364608.6
+      }
+    ],
+    "education": [
+      {
+        "id": "elementary-secondary-and-vocational-education",
+        "label": "Elementary, secondary, and vocational education",
+        "outlay": 66477020463.74
+      },
+      {
+        "id": "higher-education",
+        "label": "Higher education",
+        "outlay": -34998824947.6
+      },
+      {
+        "id": "social-services",
+        "label": "Social services",
+        "outlay": 26308836945.74
+      },
+      {
+        "id": "research-and-general-education-aids",
+        "label": "Research and general education aids",
+        "outlay": 4655855850.54
+      },
+      {
+        "id": "training-and-employment",
+        "label": "Training and employment",
+        "outlay": 4474371840.59
+      },
+      {
+        "id": "other-labor-services",
+        "label": "Other labor services",
+        "outlay": 2276874796.4
+      }
+    ],
+    "health": [
+      {
+        "id": "health-care-services",
+        "label": "Health care services",
+        "outlay": 922459783173.2
+      },
+      {
+        "id": "health-research-and-training",
+        "label": "Health research and training",
+        "outlay": 50836066664.78
+      },
+      {
+        "id": "consumer-and-occupational-health-and-safety",
+        "label": "Consumer and occupational health and safety",
+        "outlay": 5581318801.97
+      }
+    ],
+    "medicare": [
+      {
+        "id": "medicare",
+        "label": "Medicare",
+        "outlay": 996719243004.76
+      }
+    ],
+    "incomeSecurity": [
+      {
+        "id": "other-income-security",
+        "label": "Other income security",
+        "outlay": 235314461107.8
+      },
+      {
+        "id": "federal-employee-retirement-and-disability",
+        "label": "Federal employee retirement and disability",
+        "outlay": 190271964798.5
+      },
+      {
+        "id": "food-and-nutrition-assistance",
+        "label": "Food and nutrition assistance",
+        "outlay": 149600218116.47
+      },
+      {
+        "id": "housing-assistance",
+        "label": "Housing assistance",
+        "outlay": 77680545649.82
+      },
+      {
+        "id": "unemployment-compensation",
+        "label": "Unemployment compensation",
+        "outlay": 42727872445.55
+      },
+      {
+        "id": "general-retirement-and-disability-insurance-excluding-social-se",
+        "label": "General retirement and disability insurance (excluding social se",
+        "outlay": 5988536011.49
+      }
+    ],
+    "socialSecurity": [
+      {
+        "id": "social-security",
+        "label": "Social security",
+        "outlay": 1580685783033.83
+      }
+    ],
+    "verteransBenefits": [
+      {
+        "id": "income-security-for-veterans",
+        "label": "Income security for veterans",
+        "outlay": 200630033490.87
+      },
+      {
+        "id": "hospital-and-medical-care-for-veterans",
+        "label": "Hospital and medical care for veterans",
+        "outlay": 117588059881.23
+      },
+      {
+        "id": "other-veterans-benefits-and-services",
+        "label": "Other veterans benefits and services",
+        "outlay": 41584690921.1
+      },
+      {
+        "id": "veterans-education-training-and-rehabilitation",
+        "label": "Veterans education, training, and rehabilitation",
+        "outlay": 16377484646.86
+      },
+      {
+        "id": "veterans-housing",
+        "label": "Veterans housing",
+        "outlay": 981614040.53
+      }
+    ],
+    "administrationOfJustice": [
+      {
+        "id": "federal-law-enforcement-activities",
+        "label": "Federal law enforcement activities",
+        "outlay": 45888641717.78
+      },
+      {
+        "id": "federal-litigative-and-judicial-activities",
+        "label": "Federal litigative and judicial activities",
+        "outlay": 19908666288.05
+      },
+      {
+        "id": "criminal-justice-assistance",
+        "label": "Criminal justice assistance",
+        "outlay": 10248937975.94
+      },
+      {
+        "id": "federal-correctional-activities",
+        "label": "Federal correctional activities",
+        "outlay": 9134212308.23
+      }
+    ],
+    "generalGovernment": [
+      {
+        "id": "central-fiscal-operations",
+        "label": "Central fiscal operations",
+        "outlay": 15092607337.47
+      },
+      {
+        "id": "general-purpose-fiscal-assistance",
+        "label": "General purpose fiscal assistance",
+        "outlay": 9062308644.37
+      },
+      {
+        "id": "legislative-functions",
+        "label": "Legislative functions",
+        "outlay": 6302838751.33
+      },
+      {
+        "id": "other-general-government",
+        "label": "Other general government",
+        "outlay": 5495294457.05
+      },
+      {
+        "id": "deductions-for-offsetting-receipts",
+        "label": "Deductions for offsetting receipts",
+        "outlay": -672535087.17
+      },
+      {
+        "id": "executive-direction-and-management",
+        "label": "Executive direction and management",
+        "outlay": 585923176.71
+      },
+      {
+        "id": "central-personnel-management",
+        "label": "Central personnel management",
+        "outlay": 432638476.6
+      },
+      {
+        "id": "general-property-and-records-management",
+        "label": "General property and records management",
+        "outlay": -20473536.84
+      }
+    ],
+    "interest": [
+      {
+        "id": "interest-on-treasury-debt-securities-gross",
+        "label": "Interest on Treasury debt securities (gross)",
+        "outlay": 1215610886690.65
+      },
+      {
+        "id": "interest-received-by-on-budget-trust-funds",
+        "label": "Interest received by on-budget trust funds",
+        "outlay": -117531785228.34
+      },
+      {
+        "id": "interest-received-by-off-budget-trust-funds",
+        "label": "Interest received by off-budget trust funds",
+        "outlay": -70025521478.34
+      },
+      {
+        "id": "other-interest",
+        "label": "Other interest",
+        "outlay": -55072769310.57
+      },
+      {
+        "id": "other-investment-income",
+        "label": "Other investment income",
+        "outlay": -2621923679.08
+      }
+    ],
+    "undistributedOffsettingReceipts": [
+      {
+        "id": "employer-share-employee-retirement-on-budget",
+        "label": "Employer share, employee retirement (on-budget)",
+        "outlay": -120078162889.55
+      },
+      {
+        "id": "employer-share-employee-retirement-off-budget",
+        "label": "Employer share, employee retirement (off-budget)",
+        "outlay": -24370000000.0
+      },
+      {
+        "id": "rents-and-royalties-on-the-outer-continental-shelf",
+        "label": "Rents and royalties on the Outer Continental Shelf",
+        "outlay": -5745225254.23
+      },
+      {
+        "id": "sale-of-major-assets",
+        "label": "Sale of major assets",
+        "outlay": -31383414.89
+      }
+    ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "fiscalYear": 2025,
+  "sourceUrl": "https://foreignassistance.gov/",
+  "retrievedAt": "2026-10-08T00:00:00.000Z",
+  "totalDisbursements": 36014634905.0,
+  "countries": [
+    {
+      "id": "world",
+      "label": "Global / multi-country (reported as World)",
+      "countryCode": "WLD",
+      "disbursements": 12653568487.0
+    },
+    {
+      "id": "ukraine",
+      "label": "Ukraine",
+      "countryCode": "UKR",
+      "disbursements": 6752933185.0
+    },
+    {
+      "id": "israel",
+      "label": "Israel",
+      "countryCode": "ISR",
+      "disbursements": 3310792558.0
+    },
+    {
+      "id": "jordan",
+      "label": "Jordan",
+      "countryCode": "JOR",
+      "disbursements": 1653205369.0
+    },
+    {
+      "id": "sub-saharan-africa-region",
+      "label": "Sub-Saharan Africa Region",
+      "countryCode": "SSN",
+      "disbursements": 998542990.0
+    },
+    {
+      "id": "ethiopia",
+      "label": "Ethiopia",
+      "countryCode": "ETH",
+      "disbursements": 919783491.0
+    },
+    {
+      "id": "democratic-republic-of-the-congo",
+      "label": "Democratic Republic of the Congo",
+      "countryCode": "COD",
+      "disbursements": 749911359.0
+    },
+    {
+      "id": "nigeria",
+      "label": "Nigeria",
+      "countryCode": "NGA",
+      "disbursements": 730597743.0
+    },
+    {
+      "id": "sudan",
+      "label": "Sudan",
+      "countryCode": "SDN",
+      "disbursements": 709141579.0
+    },
+    {
+      "id": "kenya",
+      "label": "Kenya",
+      "countryCode": "KEN",
+      "disbursements": 654733803.0
+    },
+    {
+      "id": "mozambique",
+      "label": "Mozambique",
+      "countryCode": "MOZ",
+      "disbursements": 586945992.0
+    },
+    {
+      "id": "uganda",
+      "label": "Uganda",
+      "countryCode": "UGA",
+      "disbursements": 512900676.0
+    },
+    {
+      "id": "south-sudan",
+      "label": "South Sudan",
+      "countryCode": "SSD",
+      "disbursements": 507363106.0
+    },
+    {
+      "id": "somalia",
+      "label": "Somalia",
+      "countryCode": "SOM",
+      "disbursements": 497620342.0
+    },
+    {
+      "id": "west-bank-and-gaza",
+      "label": "West Bank and Gaza",
+      "countryCode": "PSE",
+      "disbursements": 496170280.0
+    },
+    {
+      "id": "colombia",
+      "label": "Colombia",
+      "countryCode": "COL",
+      "disbursements": 493292543.0
+    },
+    {
+      "id": "tanzania",
+      "label": "Tanzania",
+      "countryCode": "TZA",
+      "disbursements": 480288618.0
+    },
+    {
+      "id": "lebanon",
+      "label": "Lebanon",
+      "countryCode": "LBN",
+      "disbursements": 456072834.0
+    },
+    {
+      "id": "afghanistan",
+      "label": "Afghanistan",
+      "countryCode": "AFG",
+      "disbursements": 431441204.0
+    },
+    {
+      "id": "europe-and-eurasia-region",
+      "label": "Europe and Eurasia Region",
+      "countryCode": "EES",
+      "disbursements": 423393699.0
+    },
+    {
+      "id": "zambia",
+      "label": "Zambia",
+      "countryCode": "ZMB",
+      "disbursements": 409368026.0
+    },
+    {
+      "id": "micronesia-federated-states-of",
+      "label": "Micronesia, Federated States of",
+      "countryCode": "FSM",
+      "disbursements": 400599422.0
+    },
+    {
+      "id": "south-africa",
+      "label": "South Africa",
+      "countryCode": "ZAF",
+      "disbursements": 399132963.0
+    },
+    {
+      "id": "bangladesh",
+      "label": "Bangladesh",
+      "countryCode": "BGD",
+      "disbursements": 393687584.0
+    },
+    {
+      "id": "haiti",
+      "label": "Haiti",
+      "countryCode": "HTI",
+      "disbursements": 393147052.0
+    }
+  ]
+}

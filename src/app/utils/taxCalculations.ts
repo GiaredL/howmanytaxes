@@ -1,83 +1,94 @@
-import { taxBrackets2024 } from '../constants/taxBrackets'
+/**
+ * Compatibility shims — prefer `@/lib/tax/*` for new code.
+ */
+import {
+  allocateCountryAidContributions,
+  allocateSubProgramContributions,
+  calculateProgramContribution,
+} from "@/lib/tax/allocate";
+import type { CountryAidOutlay } from "@/lib/fiscal/foreignAidClient";
+import { calculateFederalTaxes } from "@/lib/tax/federalTaxes";
+import { taxOnTaxableIncome } from "@/lib/tax/incomeTax";
+import { DEFAULT_TAX_YEAR, getTaxYearConfig } from "@/lib/tax/taxYears";
+import type { FederalTaxResult, FilingStatus } from "@/lib/tax/types";
+import type { ProgramId, SubProgramOutlay } from "@/lib/fiscal/types";
 
-export type TaxBracket = {
-  rate: number
-  min: number
-  max: number | null
-}
+export type { FilingStatus, TaxBracket } from "@/lib/tax/types";
+export type { ProgramId as BudgetStatus };
 
-export type FilingStatus = 'single' | 'married-jointly' | 'married-separately' | 'head-of-household'
-export type BudgetStatus =
-  | 'israelTaxDollars2025'
-  | 'medicare'
-  | 'socialSecurity'
-  | 'nationalDefense'
-  | 'interest'
-  | 'verteransBenefits'
-  | 'transportation'
-  | 'education'
-  | 'agriculture'
+/** @deprecated Prefer calculateFederalTaxes — income tax only, employee assumption, default tax year. */
+export const getStandardDeduction = (
+  filingStatus: FilingStatus,
+  taxYear: number = DEFAULT_TAX_YEAR
+): number => getTaxYearConfig(taxYear).standardDeduction[filingStatus];
 
-export const findTaxBracket = (income: number, filingStatus: FilingStatus): TaxBracket | undefined => {
-  const brackets = getBracketsForFilingStatus(filingStatus)
-  return brackets.find(bracket => income >= bracket.min && (bracket.max === null || income <= bracket.max))
-}
-
-export const getBracketsForFilingStatus = (filingStatus: FilingStatus): TaxBracket[] => {
-  switch (filingStatus) {
-    case 'married-jointly':
-      return taxBrackets2024.marriedJoint
-    case 'married-separately':
-      return taxBrackets2024.marriedSeparate
-    case 'head-of-household':
-      return taxBrackets2024.headOfHousehold
-    case 'single':
-    default:
-      return taxBrackets2024.single
-  }
-}
-
-export const getStandardDeduction = (filingStatus: FilingStatus): number => {
-  switch (filingStatus) {
-    case 'married-jointly':
-      return 27700
-    case 'married-separately':
-      return 13850
-    case 'head-of-household':
-      return 20800
-    case 'single':
-    default:
-      return 13850
-  }
-}
-
+/** @deprecated Prefer calculateFederalTaxes. */
 export const calculateTax = (
   income: number,
   filingStatus: FilingStatus,
   { applyStandardDeduction = true }: { applyStandardDeduction?: boolean } = {}
 ): number => {
-  const deduction = applyStandardDeduction ? getStandardDeduction(filingStatus) : 0
-  const taxableIncome = Math.max(0, income - deduction)
-
-  const brackets = getBracketsForFilingStatus(filingStatus)
-  let totalTax = 0
-  for (const bracket of brackets) {
-    if (taxableIncome > bracket.min) {
-      const taxableAmount = Math.min(taxableIncome - bracket.min, (bracket.max ?? Infinity) - bracket.min)
-      totalTax += taxableAmount * bracket.rate
-    }
-    if (bracket.max === null || taxableIncome <= bracket.max) {
-      break
-    }
+  if (!applyStandardDeduction) {
+    const config = getTaxYearConfig(DEFAULT_TAX_YEAR);
+    return taxOnTaxableIncome(Math.max(0, income), config.brackets[filingStatus]);
   }
+  return calculateFederalTaxes({
+    taxYear: DEFAULT_TAX_YEAR,
+    filingStatus,
+    employmentType: "employee",
+    income,
+  }).incomeTax.incomeTax;
+};
 
-  return totalTax
-}
-
+/** @deprecated Prefer calculateProgramContribution. */
 export const calculateTaxContribution = (
   taxPaid: number,
   totalTaxDollars: number,
   budgetTaxDollars: number
 ): number => {
-  return (taxPaid / totalTaxDollars) * budgetTaxDollars
+  if (totalTaxDollars <= 0) return 0;
+  return (taxPaid / totalTaxDollars) * budgetTaxDollars;
+};
+
+export function estimateTaxesForUi(options: {
+  income: number;
+  spouseIncome?: number;
+  filingStatus: FilingStatus;
+  employmentType: "employee" | "self-employed";
+  taxYear?: number;
+  itemizedDeductions?: number;
+}): FederalTaxResult {
+  return calculateFederalTaxes({
+    taxYear: options.taxYear ?? DEFAULT_TAX_YEAR,
+    filingStatus: options.filingStatus,
+    employmentType: options.employmentType,
+    income: options.income,
+    spouseIncome: options.spouseIncome,
+    itemizedDeductions: options.itemizedDeductions,
+  });
+}
+
+export function estimateProgramContributionForUi(options: {
+  taxes: FederalTaxResult;
+  programId: ProgramId;
+  programOutlay: number;
+  totalIndividualIncomeTaxReceipts: number;
+}) {
+  return calculateProgramContribution(options);
+}
+
+export function estimateSubProgramContributionsForUi(options: {
+  parentUserAmount: number;
+  parentOutlay: number;
+  children: SubProgramOutlay[];
+}) {
+  return allocateSubProgramContributions(options);
+}
+
+export function estimateCountryAidContributionsForUi(options: {
+  internationalAffairsUserAmount: number;
+  countries: CountryAidOutlay[];
+  totalDisbursements: number;
+}) {
+  return allocateCountryAidContributions(options);
 }

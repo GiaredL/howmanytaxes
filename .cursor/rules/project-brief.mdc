@@ -1,0 +1,31 @@
+---
+description: Core product brief — tax allocation accuracy, official data sources, agent workflow
+alwaysApply: true
+---
+
+# HowManyTaxes agent rule
+
+Before changing tax math, budgets, spending data, or methodology UI copy, read and follow:
+
+`docs/PROJECT_BRIEF.md`
+
+## Product north star
+
+Help users see how **their** federal tax dollars map to real government programs, using **official** spending/revenue sources — not hardcoded guesses.
+
+## Hard constraints
+
+- Separate **income tax** (general fund) from **payroll/SE taxes** (Social Security / Medicare HI). Do not allocate Social Security primarily as a slice of income tax.
+- Prefer Treasury Fiscal Data (MTS), OMB Historical Tables, IRS, and SSA over secondary blogs.
+- Every budget figure needs `fiscalYear`, source URL, and retrieval/cache metadata.
+- Handle employee vs self-employed FICA/SECA (wage base, 92.35% SE base, deductible half of SE tax).
+- Keep estimators honest: list omissions (credits, AMT, itemizing, etc.) in the UI.
+
+## Implementation preferences
+
+- Pure, testable calc modules; thin React pages.
+- Version tax parameters by tax year (`2025`, `2026`, …).
+- Cache government API responses; do not call uncached Treasury on every request.
+- Prefer MTS/OMB budget **functions** over ad-hoc political line items.
+
+When the brief and code disagree, update the brief or fix the code so they match — do not silently diverge.

@@ -1,14 +1,17 @@
-export const budgets = {
-  israelTaxDollars2025: 17900000000,
-  totalSnapBenefits: 99800000000,
-  medicare: 1333245259786,
-  socialSecurity: 1247710990542,
-  nationalDefense: 1057469596179,
-  interest: 941280108941,
-  verteransBenefits: 303248898300,
-  transportation: 118035547875,
-  education: 85812444665,
-  agriculture: 48540988307
-}
+import { getFallbackBudgetSnapshot, outlaysRecordFromSnapshot, totalIncomeTaxReceiptsFromSnapshot } from "@/lib/fiscal/budgetSnapshot";
+import type { ProgramId, SubProgramOutlay } from "@/lib/fiscal/types";
 
-export const totalTaxDollars = 5200000000000
+export type { ProgramId };
+
+/** Static fallback for SSR/build; prefer `/api/budget` or `getFederalBudgetSnapshot()`. */
+const fallback = getFallbackBudgetSnapshot();
+
+export const budgets: Record<ProgramId, number> = outlaysRecordFromSnapshot(fallback);
+
+export const subBudgets: Partial<Record<ProgramId, SubProgramOutlay[]>> =
+  fallback.subOutlaysByProgram ?? {};
+
+/** Individual income tax receipts (FY actuals from Treasury MTS Table 9). */
+export const totalTaxDollars = totalIncomeTaxReceiptsFromSnapshot(fallback);
+
+export const budgetMeta = fallback.meta;
