@@ -14,4 +14,7 @@ export const subBudgets: Partial<Record<ProgramId, SubProgramOutlay[]>> =
 /** Individual income tax receipts (FY actuals from Treasury MTS Table 9). */
 export const totalTaxDollars = totalIncomeTaxReceiptsFromSnapshot(fallback);
 
+/** Sum of MTS function outlays for the spending FY. */
+export const totalFunctionOutlays = fallback.totalFunctionOutlays;
+
 export const budgetMeta = fallback.meta;

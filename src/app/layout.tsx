@@ -4,9 +4,25 @@ import './globals.css'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: 'How Many Taxes?',
+  title: {
+    default: 'HowManyTaxes — Estimate where your federal taxes might go',
+    template: '%s · HowManyTaxes',
+  },
   description:
-    'Independent estimate of how federal taxes map to government programs. Not tax advice. Not affiliated with the IRS or U.S. government.',
+    'A rough, independent estimate to help visualize what your federal tax dollars might be spent on. Not tax advice. Not affiliated with the IRS or U.S. government.',
+  openGraph: {
+    title: 'HowManyTaxes — Estimate where your federal taxes might go',
+    description:
+      'A rough estimate to help visualize what your federal tax dollars might be spent on. Not tax advice. Not a government website.',
+    type: 'website',
+    siteName: 'HowManyTaxes',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'HowManyTaxes — Estimate where your federal taxes might go',
+    description:
+      'A rough estimate to help visualize what your federal tax dollars might be spent on. Not tax advice.',
+  },
 }
 
 export default function RootLayout({

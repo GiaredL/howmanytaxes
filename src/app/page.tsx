@@ -6,6 +6,7 @@ import {
   budgetMeta as staticBudgetMeta,
   budgets as fallbackBudgets,
   subBudgets as fallbackSubBudgets,
+  totalFunctionOutlays as fallbackTotalFunctionOutlays,
   totalTaxDollars as fallbackTotalTaxDollars,
 } from "./constants/budgets";
 import { PROGRAM_OPTIONS } from "./constants/programs";
@@ -32,6 +33,7 @@ import Calculation from "./components/Calculation";
 import ContributionCards, {
   type ContributionRow,
 } from "./components/ContributionCards";
+import ContributionStats from "./components/ContributionStats";
 import AllocationTree from "./components/AllocationTree";
 import LiveCurrency from "./components/LiveCurrency";
 
@@ -66,11 +68,14 @@ export default function Home() {
   const [budgets, setBudgets] = useState(fallbackBudgets);
   const [subBudgets, setSubBudgets] = useState(fallbackSubBudgets);
   const [totalTaxDollars, setTotalTaxDollars] = useState(
-    fallbackTotalTaxDollars
+    fallbackTotalTaxDollars,
+  );
+  const [totalFunctionOutlays, setTotalFunctionOutlays] = useState(
+    fallbackTotalFunctionOutlays,
   );
   const [budgetMeta, setBudgetMeta] = useState(staticBudgetMeta);
   const [countryAid, setCountryAid] = useState<CountryAidSnapshot | null>(
-    fallbackCountryAid as CountryAidSnapshot
+    fallbackCountryAid as CountryAidSnapshot,
   );
 
   const incomeNum = Number.parseFloat(income) || 0;
@@ -122,10 +127,10 @@ export default function Home() {
   }).sort((a, b) => b.amount - a.amount);
 
   const incomeTaxPrograms = contributionRows.filter(
-    (r) => r.ledger === "income-tax"
+    (r) => r.ledger === "income-tax",
   );
   const payrollPrograms = contributionRows.filter(
-    (r) => r.ledger === "payroll-oasdi" || r.ledger === "payroll-hi"
+    (r) => r.ledger === "payroll-oasdi" || r.ledger === "payroll-hi",
   );
 
   const selectedRow = contributionRows.find((r) => r.programId === selected);
@@ -145,13 +150,14 @@ export default function Home() {
       setFormError(
         isMfjEmployee
           ? "Enter your wages and/or your spouse’s wages to continue."
-          : "Enter your yearly income to continue."
+          : "Enter your yearly income to continue.",
       );
       return;
     }
     setFormError("");
     setShowResults(true);
     setEditOpen(false);
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }
 
   function handleStartOver() {
@@ -173,6 +179,9 @@ export default function Home() {
         if (data?.budgets && typeof data.totalTaxDollars === "number") {
           setBudgets(data.budgets);
           setTotalTaxDollars(data.totalTaxDollars);
+          if (typeof data.totalFunctionOutlays === "number") {
+            setTotalFunctionOutlays(data.totalFunctionOutlays);
+          }
           if (data.subBudgets) {
             setSubBudgets(data.subBudgets);
           }
@@ -266,9 +275,7 @@ export default function Home() {
         <span>How you earn</span>
         <select
           value={employmentType}
-          onChange={(e) =>
-            setEmploymentType(e.target.value as EmploymentType)
-          }
+          onChange={(e) => setEmploymentType(e.target.value as EmploymentType)}
         >
           <option value="employee">Employee (W-2)</option>
           <option value="self-employed">Self-employed</option>
@@ -396,8 +403,7 @@ export default function Home() {
                 </p>
                 <p className={styles.resultsDisclaimerSecondary}>
                   {DISCLAIMER_SOURCES} Spending figures use public U.S. Treasury
-                  data (FY{budgetMeta.fiscalYear}).{" "}
-                  {DISCLAIMER_NOT_AFFILIATED}
+                  data (FY{budgetMeta.fiscalYear}). {DISCLAIMER_NOT_AFFILIATED}
                 </p>
               </div>
 
@@ -457,7 +463,7 @@ export default function Home() {
                       amount={yearToDateAmount(
                         taxEstimate.incomeTax.incomeTax,
                         now,
-                        taxYear
+                        taxYear,
                       )}
                     />
                   </strong>
@@ -473,7 +479,7 @@ export default function Home() {
                       amount={yearToDateAmount(
                         taxEstimate.payroll.totalPayrollTax,
                         now,
-                        taxYear
+                        taxYear,
                       )}
                     />
                   </strong>
@@ -485,7 +491,7 @@ export default function Home() {
                       amount={yearToDateAmount(
                         taxEstimate.totalFederalTax,
                         now,
-                        taxYear
+                        taxYear,
                       )}
                     />
                   </strong>
@@ -498,7 +504,7 @@ export default function Home() {
                         amount={yearToDateAmount(
                           selectedRow.amount,
                           now,
-                          taxYear
+                          taxYear,
                         )}
                       />
                     </strong>
@@ -529,6 +535,23 @@ export default function Home() {
                 layout="full"
               />
             </div>
+
+            {taxEstimate && (
+              <div className={styles.fadeInSlower}>
+                <ContributionStats
+                  taxes={taxEstimate}
+                  totalIndividualIncomeTaxReceipts={totalTaxDollars}
+                  totalFunctionOutlays={totalFunctionOutlays}
+                  spendingFiscalYear={budgetMeta.fiscalYear}
+                  internationalAffairsAmount={
+                    contributionRows.find(
+                      (r) => r.programId === "internationalAffairs",
+                    )?.amount ?? 0
+                  }
+                  countryAid={countryAid}
+                />
+              </div>
+            )}
 
             <div className={styles.fadeInSlower}>
               <Calculation />
@@ -565,7 +588,7 @@ export default function Home() {
               {inputForm}
             </div>
           </div>,
-          document.body
+          document.body,
         )}
 
       {graphOpen && hasResults && (
