@@ -171,9 +171,9 @@ export default function ContributionStats({
   );
 
   const header = useScrollReveal<HTMLElement>();
-  const altsReveal = useScrollReveal<HTMLElement>();
-  const scaleReveal = useScrollReveal<HTMLElement>();
-  const countriesReveal = useScrollReveal<HTMLElement>();
+  const altsReveal = useScrollReveal<HTMLDivElement>();
+  const scaleReveal = useScrollReveal<HTMLDivElement>();
+  const countriesReveal = useScrollReveal<HTMLDivElement>();
 
   const scaleActive = scaleReveal.visible;
   const belowCount = useCountUp(rank.returnsBelow, scaleActive, 1500);
