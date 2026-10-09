@@ -5,6 +5,7 @@ import {
   formatAltQuantity,
   pickAltPurchases,
 } from "@/lib/insights/altPurchases";
+import { pickShockPurchases } from "@/lib/insights/shockPurchases";
 import { topCountryContributions } from "@/lib/insights/countryAidInsights";
 import type { FederalTaxResult } from "@/lib/tax/types";
 import {
@@ -169,9 +170,15 @@ export default function ContributionStats({
     householdIncome,
     5,
   );
+  const shockPurchases = pickShockPurchases(
+    taxes.totalFederalTax,
+    householdIncome,
+    4,
+  );
 
   const header = useScrollReveal<HTMLElement>();
   const altsReveal = useScrollReveal<HTMLDivElement>();
+  const shockReveal = useScrollReveal<HTMLDivElement>();
   const scaleReveal = useScrollReveal<HTMLDivElement>();
   const countriesReveal = useScrollReveal<HTMLDivElement>();
 
@@ -222,6 +229,39 @@ export default function ContributionStats({
             <p className={styles.blockNote}>
               Impact figures are rough “cost of help” estimates (meals, rent),
               not government program outlays.
+            </p>
+          </div>
+        )}
+
+        {shockPurchases.length > 0 && (
+          <div
+            ref={shockReveal.ref}
+            className={`${styles.block} ${
+              shockReveal.visible ? styles.visible : ""
+            }`}
+          >
+            <div className={styles.sectionHead}>
+              <h3>Your whole tax bill vs one of these</h3>
+              <p>
+                Same estimated federal tax, next to rough public sticker prices
+                for gear people often hate paying for — so you can see how small
+                one household is next to a single unit.
+              </p>
+            </div>
+            <ul className={styles.altList}>
+              {shockPurchases.map((item) => (
+                <li key={item.id} data-vibe="shock">
+                  <strong>~{item.quantityLabel}</strong>
+                  <div className={styles.altCopy}>
+                    <span>{item.label}</span>
+                    <em>{item.priceNote} · ballpark, not a contract bid</em>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className={styles.blockNote}>
+              Unit costs are commonly cited public ballparks (ammo, missiles,
+              aircraft). Real DoD prices vary by lot, year, and what’s included.
             </p>
           </div>
         )}
@@ -366,9 +406,7 @@ export default function ContributionStats({
         <a href={IRS_AGI_SOURCE.url} target="_blank" rel="noreferrer">
           IRS source
         </a>
-        . We don’t list named billionaires — public sources don’t publish
-        verifiable current individual tax bills for the ultra-wealthy in a way
-        we can compare fairly.
+        .
       </p>
     </section>
   );
