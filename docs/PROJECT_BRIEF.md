@@ -82,7 +82,7 @@ Wage bases (keep current in data config):
 
 ### 3.4 Be honest about approximations
 
-v1 may omit credits, AMT, NIIT, capital gains stacking, Schedule A line validation, etc. Optional itemized is a single total vs standard (take the greater). Every omission must be listed in the UI. Never imply IRS-level precision.
+v1 includes a **simplified Child Tax Credit** when the user enters kids under 17 (phase-out + nonrefundable CTC against income tax; ACTC estimated but not treated as negative program funding). Still omits EITC, ODC, AMT, NIIT, capital gains stacking, Schedule A line validation, etc. Optional itemized is a single total vs standard (take the greater). Every omission must be listed in the UI. Never imply IRS-level precision.
 
 ---
 

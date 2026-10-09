@@ -65,4 +65,15 @@ export const taxYear2026: TaxYearConfig = {
     "married-separately": 125_000,
     "head-of-household": 200_000,
   },
+  // Schedule 8812 TY2026 — IRS Rev. Proc. 2025-32 / draft instructions
+  childTaxCredit: {
+    amountPerChild: 2_200,
+    refundablePerChild: 1_700,
+    phaseOutThresholdMarriedJointly: 400_000,
+    phaseOutThresholdOther: 200_000,
+    phaseOutPerThousand: 50,
+    actcEarnedIncomeFloor: 2_500,
+    actcEarnedIncomeRate: 0.15,
+    sourceUrl: "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+  },
 };

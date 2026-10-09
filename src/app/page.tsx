@@ -72,6 +72,7 @@ export default function Home() {
   const [employmentType, setEmploymentType] =
     useState<EmploymentType>("employee");
   const [itemizedDeductions, setItemizedDeductions] = useState("");
+  const [qualifyingChildren, setQualifyingChildren] = useState("0");
   const [taxYear] = useState(DEFAULT_TAX_YEAR);
   const [showResults, setShowResults] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
@@ -95,6 +96,10 @@ export default function Home() {
   const incomeNum = parseMoney(income) || 0;
   const spouseNum = parseMoney(spouseIncome) || 0;
   const itemizedNum = parseMoney(itemizedDeductions);
+  const kidsNum = Math.max(
+    0,
+    Math.min(20, Math.floor(Number.parseInt(qualifyingChildren, 10) || 0)),
+  );
   const hasItemizedEntry =
     itemizedDeductions.trim() !== "" && Number.isFinite(itemizedNum);
   const isMfjEmployee =
@@ -110,6 +115,7 @@ export default function Home() {
           employmentType,
           taxYear,
           itemizedDeductions: hasItemizedEntry ? itemizedNum : undefined,
+          qualifyingChildrenUnder17: kidsNum,
         })
       : null;
 
@@ -295,6 +301,20 @@ export default function Home() {
       </label>
 
       <label className={styles.field}>
+        <span>Kids under 17 (Child Tax Credit)</span>
+        <input
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          value={qualifyingChildren}
+          onChange={(e) => {
+            setQualifyingChildren(e.target.value.replace(/\D/g, "").slice(0, 2));
+          }}
+          placeholder="0"
+        />
+      </label>
+
+      <label className={styles.field}>
         <span>Itemized deductions (optional)</span>
         <input
           type="text"
@@ -319,6 +339,9 @@ export default function Home() {
         : hasItemizedEntry && itemizedNum <= standardDeduction
           ? " · Your itemized entry is at or below standard, so we still use the standard deduction."
           : " · Leave itemized blank unless yours is higher."}
+      {kidsNum > 0
+        ? ` · ${kidsNum} kid${kidsNum === 1 ? "" : "s"} under 17 → simplified Child Tax Credit (assumes they qualify).`
+        : ""}
     </p>
   );
 
@@ -444,6 +467,33 @@ export default function Home() {
                     <dt>Deduction</dt>
                     <dd>{deductionSummary}</dd>
                   </div>
+                  <div>
+                    <dt>Kids under 17</dt>
+                    <dd>{kidsNum}</dd>
+                  </div>
+                  {taxEstimate && taxEstimate.incomeTax.childTaxCredit > 0 && (
+                    <div>
+                      <dt>CTC (cut your income tax)</dt>
+                      <dd>
+                        −
+                        {formatCurrencyWithSymbol(
+                          taxEstimate.incomeTax.childTaxCredit,
+                        )}
+                      </dd>
+                    </div>
+                  )}
+                  {taxEstimate &&
+                    taxEstimate.incomeTax.additionalChildTaxCredit > 0 && (
+                      <div>
+                        <dt>ACTC (est. refund)</dt>
+                        <dd>
+                          +
+                          {formatCurrencyWithSymbol(
+                            taxEstimate.incomeTax.additionalChildTaxCredit,
+                          )}
+                        </dd>
+                      </div>
+                    )}
                 </dl>
                 <div className={styles.summaryActions}>
                   <button
@@ -533,6 +583,18 @@ export default function Home() {
                   Deductions can wipe out income tax, but Social Security and
                   Medicare payroll taxes are still based on wages (or SE
                   earnings) — they aren’t reduced by itemizing.
+                </p>
+              )}
+
+            {taxEstimate &&
+              taxEstimate.incomeTax.additionalChildTaxCredit > 0 && (
+                <p className={`${styles.hint} ${styles.fadeIn}`}>
+                  Estimated Additional Child Tax Credit refund: about{" "}
+                  {formatCurrencyWithSymbol(
+                    taxEstimate.incomeTax.additionalChildTaxCredit,
+                  )}
+                  . That’s a possible refund to you — it isn’t counted as
+                  negative funding in the program breakdown below.
                 </p>
               )}
 

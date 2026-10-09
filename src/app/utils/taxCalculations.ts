@@ -57,6 +57,7 @@ export function estimateTaxesForUi(options: {
   employmentType: "employee" | "self-employed";
   taxYear?: number;
   itemizedDeductions?: number;
+  qualifyingChildrenUnder17?: number;
 }): FederalTaxResult {
   return calculateFederalTaxes({
     taxYear: options.taxYear ?? DEFAULT_TAX_YEAR,
@@ -65,6 +66,7 @@ export function estimateTaxesForUi(options: {
     income: options.income,
     spouseIncome: options.spouseIncome,
     itemizedDeductions: options.itemizedDeductions,
+    qualifyingChildrenUnder17: options.qualifyingChildrenUnder17,
   });
 }
 

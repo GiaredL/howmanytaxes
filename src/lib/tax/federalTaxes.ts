@@ -1,3 +1,4 @@
+import { calculateChildTaxCredit } from "./childTaxCredit";
 import { calculateIncomeTaxFromAgi } from "./incomeTax";
 import { calculatePayrollTax } from "./payrollTax";
 import { getTaxYearConfig } from "./taxYears";
@@ -9,7 +10,8 @@ function roundCents(n: number): number {
 
 /**
  * Estimate federal income tax + payroll/SE taxes for a simple profile.
- * Omits credits, AMT, NIIT, capital gains stacking, etc.
+ * Includes a simplified Child Tax Credit when kids are entered.
+ * Omits EITC, AMT, NIIT, capital gains stacking, ODC, etc.
  * Deduction: standard by default; optional itemized if higher than standard.
  *
  * MFJ: pass your wages + spouse wages separately so OASDI wage bases apply per person,
@@ -40,6 +42,16 @@ export function calculateFederalTaxes(input: FederalTaxInput): FederalTaxResult 
     input.itemizedDeductions
   );
 
+  const taxBeforeCredits = roundCents(incomeParts.incomeTax);
+  const ctc = calculateChildTaxCredit({
+    qualifyingChildrenUnder17: input.qualifyingChildrenUnder17 ?? 0,
+    adjustedGrossIncome,
+    earnedIncome: householdGross,
+    incomeTaxBeforeCredits: taxBeforeCredits,
+    filingStatus: input.filingStatus,
+    config,
+  });
+
   const incomeTax = {
     grossIncome: householdGross,
     deductibleHalfOfSeTax: payroll.deductibleHalfOfSeTax,
@@ -47,7 +59,11 @@ export function calculateFederalTaxes(input: FederalTaxInput): FederalTaxResult 
     deductionTaken: incomeParts.deductionTaken,
     usedItemized: incomeParts.usedItemized,
     taxableIncome: incomeParts.taxableIncome,
-    incomeTax: roundCents(incomeParts.incomeTax),
+    incomeTaxBeforeCredits: taxBeforeCredits,
+    qualifyingChildrenUnder17: ctc.qualifyingChildren,
+    childTaxCredit: roundCents(ctc.nonrefundableApplied),
+    additionalChildTaxCredit: roundCents(ctc.additionalChildTaxCredit),
+    incomeTax: ctc.incomeTaxAfterCredits,
   };
 
   return {

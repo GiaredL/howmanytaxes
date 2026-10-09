@@ -14,6 +14,21 @@ export type TaxBracket = {
   max: number | null;
 };
 
+/** Simplified Child Tax Credit / ACTC parameters (Schedule 8812). */
+export type ChildTaxCreditConfig = {
+  /** Max CTC per qualifying child under 17. */
+  amountPerChild: number;
+  /** Max refundable ACTC per qualifying child. */
+  refundablePerChild: number;
+  phaseOutThresholdMarriedJointly: number;
+  phaseOutThresholdOther: number;
+  /** Reduction per full (or partial) $1,000 of MAGI over the threshold. */
+  phaseOutPerThousand: number;
+  actcEarnedIncomeFloor: number;
+  actcEarnedIncomeRate: number;
+  sourceUrl: string;
+};
+
 export type TaxYearConfig = {
   taxYear: number;
   sourceUrl: string;
@@ -28,6 +43,7 @@ export type TaxYearConfig = {
   seNetEarningsMultiplier: number;
   additionalMedicareRate: number;
   additionalMedicareThreshold: Record<FilingStatus, number>;
+  childTaxCredit: ChildTaxCreditConfig;
 };
 
 export type FederalTaxInput = {
@@ -49,6 +65,11 @@ export type FederalTaxInput = {
    * filing status, that amount is used; otherwise the standard deduction applies.
    */
   itemizedDeductions?: number;
+  /**
+   * Qualifying children under age 17 (simplified CTC). Assumed to meet SSN /
+   * residency / relationship tests — disclosed in the UI.
+   */
+  qualifyingChildrenUnder17?: number;
 };
 
 export type PayrollTaxResult = {
@@ -74,6 +95,17 @@ export type IncomeTaxResult = {
   deductionTaken: number;
   usedItemized: boolean;
   taxableIncome: number;
+  /** Tax on taxable income before credits. */
+  incomeTaxBeforeCredits: number;
+  qualifyingChildrenUnder17: number;
+  /** Nonrefundable Child Tax Credit applied. */
+  childTaxCredit: number;
+  /**
+   * Simplified Additional Child Tax Credit (refundable). Shown for context;
+   * not subtracted from payroll or treated as negative program funding.
+   */
+  additionalChildTaxCredit: number;
+  /** Income tax after nonrefundable CTC (≥ 0). Used for allocation. */
   incomeTax: number;
 };
 

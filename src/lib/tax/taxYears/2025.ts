@@ -66,4 +66,15 @@ export const taxYear2025: TaxYearConfig = {
     "married-separately": 125_000,
     "head-of-household": 200_000,
   },
+  // Schedule 8812 TY2025 — https://www.irs.gov/instructions/i1040s8
+  childTaxCredit: {
+    amountPerChild: 2_200,
+    refundablePerChild: 1_700,
+    phaseOutThresholdMarriedJointly: 400_000,
+    phaseOutThresholdOther: 200_000,
+    phaseOutPerThousand: 50,
+    actcEarnedIncomeFloor: 2_500,
+    actcEarnedIncomeRate: 0.15,
+    sourceUrl: "https://www.irs.gov/instructions/i1040s8",
+  },
 };

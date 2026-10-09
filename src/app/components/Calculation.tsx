@@ -40,6 +40,20 @@ const Calculation = () => {
               (common federal practice).
             </p>
             <p>
+              If you enter kids under 17, we apply a{" "}
+              <a href="https://www.irs.gov/credits-deductions/individuals/child-tax-credit">
+                simplified Child Tax Credit
+              </a>{" "}
+              (with income phase-outs) and assume they qualify:
+            </p>
+            <p className={styles.formula}>
+              CTC that cuts your bill → lowers income tax used in the breakdown
+              <br />
+              leftover Additional CTC (ACTC) → estimated refund to you
+              <br />
+              (refund isn’t treated as negative program funding)
+            </p>
+            <p>
               <strong>Payroll tax</strong> (Social Security &amp; Medicare HI):
             </p>
             <p className={styles.formula}>
@@ -67,8 +81,13 @@ const Calculation = () => {
             <p className={styles.formula}>
               your share of a program =
               <br />
-              (your income tax ÷ all individual income taxes collected) × that
-              program’s spending
+              (your income tax after CTC ÷ all individual income taxes
+              collected) × that program’s spending
+            </p>
+            <p>
+              “Income tax after CTC” means tax owed after the nonrefundable
+              Child Tax Credit. Any Additional Child Tax Credit refund is shown
+              separately and does not shrink (or reverse) these program amounts.
             </p>
             <p>
               Spending and receipt totals come from public U.S. Treasury Fiscal
@@ -99,8 +118,10 @@ const Calculation = () => {
             <li>{DISCLAIMER_NOT_AFFILIATED}</li>
             <li>{DISCLAIMER_SOURCES}</li>
             <li>
-              We skip credits, AMT, and most special tax situations — so this
-              won’t match your exact refund or bill.
+              Kids under 17: simplified CTC can lower the income tax in your
+              breakdown; ACTC may show as an estimated refund and is not counted
+              as negative funding. We assume the kids qualify. We still skip
+              EITC, other credits, AMT, and most special situations.
             </li>
             <li>
               Employee estimates use <em>your</em> payroll-tax share, not the
