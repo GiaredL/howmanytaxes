@@ -49,6 +49,20 @@ const EMPLOYMENT_LABELS: Record<EmploymentType, string> = {
   "self-employed": "Self-employed",
 };
 
+/** Keep digits, one decimal, optional commas — avoid type=number step quirks. */
+function sanitizeMoneyInput(raw: string): string {
+  const cleaned = raw.replace(/[^\d.,]/g, "");
+  const noCommas = cleaned.replace(/,/g, "");
+  const parts = noCommas.split(".");
+  if (parts.length <= 1) return noCommas;
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+}
+
+function parseMoney(raw: string): number {
+  const n = Number.parseFloat(raw.replace(/,/g, ""));
+  return Number.isFinite(n) ? n : Number.NaN;
+}
+
 export default function Home() {
   const now = useNow(1000);
   const editTitleId = useId();
@@ -78,9 +92,9 @@ export default function Home() {
     fallbackCountryAid as CountryAidSnapshot,
   );
 
-  const incomeNum = Number.parseFloat(income) || 0;
-  const spouseNum = Number.parseFloat(spouseIncome) || 0;
-  const itemizedNum = Number.parseFloat(itemizedDeductions);
+  const incomeNum = parseMoney(income) || 0;
+  const spouseNum = parseMoney(spouseIncome) || 0;
+  const itemizedNum = parseMoney(itemizedDeductions);
   const hasItemizedEntry =
     itemizedDeductions.trim() !== "" && Number.isFinite(itemizedNum);
   const isMfjEmployee =
@@ -227,13 +241,12 @@ export default function Home() {
       <label className={styles.field}>
         <span>{wageLabel}</span>
         <input
-          type="number"
+          type="text"
           inputMode="decimal"
-          min={0}
-          step={1000}
+          autoComplete="off"
           value={income}
           onChange={(e) => {
-            setIncome(e.target.value);
+            setIncome(sanitizeMoneyInput(e.target.value));
             setFormError("");
           }}
           placeholder="e.g. 100000"
@@ -244,13 +257,12 @@ export default function Home() {
         <label className={styles.field}>
           <span>Spouse’s yearly W-2 wages</span>
           <input
-            type="number"
+            type="text"
             inputMode="decimal"
-            min={0}
-            step={1000}
+            autoComplete="off"
             value={spouseIncome}
             onChange={(e) => {
-              setSpouseIncome(e.target.value);
+              setSpouseIncome(sanitizeMoneyInput(e.target.value));
               setFormError("");
             }}
             placeholder="e.g. 100000"
@@ -285,12 +297,13 @@ export default function Home() {
       <label className={styles.field}>
         <span>Itemized deductions (optional)</span>
         <input
-          type="number"
+          type="text"
           inputMode="decimal"
-          min={0}
-          step={500}
+          autoComplete="off"
           value={itemizedDeductions}
-          onChange={(e) => setItemizedDeductions(e.target.value)}
+          onChange={(e) =>
+            setItemizedDeductions(sanitizeMoneyInput(e.target.value))
+          }
           placeholder={`Leave blank for standard (${formatCurrencyWithSymbol(standardDeduction)})`}
         />
       </label>
